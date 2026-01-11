@@ -40,6 +40,17 @@
           <h1>학생의 성장을 설계하는 국어 교육</h1>
           <p>수준별 맞춤 수업으로 성적과 사고력을 동시에 끌어올립니다.</p>
 
+          <!-- 강사진 요약 영역 -->
+          <div id="intro_teacher" class="intro-teacher">
+            <div class="intro-teacher-header">
+              <span>강사진</span>
+              <button id="teacherMore">더보기 →</button>
+            </div>
+            <ul class="intro-teacher-list">
+              <!-- JS로 상위 5명 자동 생성 -->
+            </ul>
+          </div>
+
           <!-- 메인 화면 공지 요약 영역 -->
           <div id="intro_notice" class="intro-notice">
             <div class="intro-notice-header">
@@ -47,7 +58,6 @@
               <button id="noticeMore">더보기 →</button>
             </div>
             <ul class="intro-notice-list">
-              <!-- 공지사항 페이지의 상단 5개가 자동 생성됨 -->
             </ul>
           </div>
         </section>
@@ -57,7 +67,8 @@
         ================================================== -->
         <section id="teacher" class="section">
           <h1>강사 소개</h1>
-          <p>대치동 검증 강사진</p>
+          <p>대치동 검증 안보라국어 강사진</p>
+          <div id="teacherList"></div>
         </section>
 
         <!-- ==================================================

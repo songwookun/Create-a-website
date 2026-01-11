@@ -14,7 +14,6 @@ fetch('data/notices.json')
     renderIntroNotices();
   });
 
-
 // ==================================================
 // [NAVIGATION] 섹션 전환 & 메뉴 활성화 (공통)
 // ==================================================
@@ -35,7 +34,6 @@ function activateSection(target) {
     .forEach(btn => btn.classList.add('active'));
 }
 
-
 // ==================================================
 // [NAVIGATION] 메뉴 클릭 처리 (PC / 모바일 공통)
 // ==================================================
@@ -46,7 +44,6 @@ menuButtons.forEach(btn => {
     closeDrawer();
   });
 });
-
 
 // ==================================================
 // [MOBILE] 햄버거 버튼 & 우측 드로어 제어
@@ -68,7 +65,6 @@ function closeDrawer() {
   drawer.classList.remove('active');
   overlay.classList.remove('active');
 }
-
 
 // ==================================================
 // [NOTICE] 공지 목록 생성 (JSON 기반)
@@ -95,7 +91,6 @@ function renderNoticeList() {
     list.appendChild(li);
   });
 }
-
 
 // ==================================================
 // [NOTICE] 공지 상세 DOM 생성 (JSON 기반)
@@ -124,7 +119,6 @@ function renderNoticeDetails() {
   });
 }
 
-
 // ==================================================
 // [NOTICE] 공지 상세 열기 (목록 → 상세)
 // ==================================================
@@ -139,26 +133,21 @@ function openNoticeDetail(id) {
 
   detail.classList.add('active');
 
-  // 조회수 증가
   const key = `notice_view_${id}`;
   const count = Number(localStorage.getItem(key) || 0) + 1;
   localStorage.setItem(key, count);
 
   detail.querySelector('.view').textContent = count;
 
-  // 날짜 표시
   const dateEl = detail.querySelector('[data-date]');
   if (dateEl) dateEl.textContent = dateEl.dataset.date;
 
-  // 목록 조회수 동기화
   const listItem = document.querySelector(`.notice-list li[data-id="${id}"]`);
   if (listItem) {
     listItem.querySelector('.view').textContent = count;
   }
-
   updateNoticeNav(id);
 }
-
 
 // ==================================================
 // [NOTICE] 메인 화면 → 공지사항 목록 이동 (더보기 버튼)
@@ -169,7 +158,6 @@ noticeMoreBtn?.addEventListener('click', () => {
   activateSection('notice');
 });
 
-
 // ==================================================
 // [NOTICE] 공지 상세 → 목록으로 돌아가기
 // ==================================================
@@ -178,7 +166,6 @@ document.addEventListener('click', e => {
     activateSection('notice');
   }
 });
-
 
 // ==================================================
 // [NOTICE] 이전글 / 다음글 네비게이션
@@ -209,7 +196,6 @@ function updateNoticeNav(currentId) {
   }
 }
 
-
 // ==================================================
 // [INTRO] 메인 화면 공지사항 상단 5개 표시
 // ==================================================
@@ -226,7 +212,6 @@ function renderIntroNotices() {
     list.appendChild(li);
   });
 }
-
 
 // ==================================================
 // [NOTICE] 공지사항 전체 개수 표시
@@ -273,4 +258,129 @@ document.querySelectorAll('.call-btn').forEach(btn => {
       btn.classList.toggle('show-tooltip');
     }
   });
+});
+// ==================================================
+// [DATA] 강사 소개 JSON 로드
+// ==================================================
+let teachers = [];
+
+fetch('data/teachers.json')
+  .then(res => res.json())
+  .then(data => {
+    teachers = data;
+    renderTeachers();
+    renderIntroTeachers();
+  });
+
+function renderTeachers() {
+  const container = document.getElementById('teacherList');
+  container.innerHTML = '';
+
+  teachers.forEach((t, cardIdx) => {
+    const card = document.createElement('div');
+    card.className = 'teacher-card';
+
+    card.innerHTML = `
+      <button class="arrow left" type="button" aria-label="이전">‹</button>
+
+      <div class="teacher-slides">
+        <div class="teacher-slide active" data-page="0">
+          <img src="${t.photo}" alt="${t.name}">
+          <h3>${t.name}</h3>
+        </div>
+
+        <div class="teacher-slide" data-page="1">
+          <h3>${t.name}</h3>
+          <ul class="teacher-spec">
+            ${t.spec.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+        </div>
+
+        <div class="teacher-slide" data-page="2">
+          <h3>수업 특징</h3>
+          <ul class="teacher-style">
+            ${t.style.map(s => `<li>${s}</li>`).join('')}
+          </ul>
+        </div>
+      </div>
+
+      <button class="arrow right" type="button" aria-label="다음">›</button>
+
+      <!-- ✅ 이 선생님 카드 전용 페이지 점 -->
+      <div class="teacher-dots" aria-label="페이지 표시"></div>
+    `;
+
+    container.appendChild(card);
+    initTeacherSlider(card);
+  });
+}
+
+function initTeacherSlider(card) {
+  const slides = Array.from(card.querySelectorAll('.teacher-slide'));
+  const prev = card.querySelector('.arrow.left');
+  const next = card.querySelector('.arrow.right');
+  const dotsWrap = card.querySelector('.teacher-dots');
+
+  let index = 0;
+
+  dotsWrap.innerHTML = slides
+    .map((_, i) => `<span class="dot ${i === 0 ? 'active' : ''}" data-dot="${i}">●</span>`)
+    .join('');
+
+  const dots = Array.from(dotsWrap.querySelectorAll('.dot'));
+
+  function show(i) {
+    slides.forEach(s => s.classList.remove('active'));
+    slides[i].classList.add('active');
+
+    dots.forEach(d => d.classList.remove('active'));
+    dots[i].classList.add('active');
+  }
+
+  prev.addEventListener('click', (e) => {
+    e.preventDefault();
+    index = (index - 1 + slides.length) % slides.length;
+    show(index);
+  });
+
+  next.addEventListener('click', (e) => {
+    e.preventDefault();
+    index = (index + 1) % slides.length;
+    show(index);
+  });
+
+  dotsWrap.addEventListener('click', (e) => {
+    const dot = e.target.closest('.dot');
+    if (!dot) return;
+    index = Number(dot.dataset.dot);
+    show(index);
+  });
+}
+
+// ==================================================
+// [INTRO] 메인 화면 강사진 요약 표시 (상위 5명)
+// ==================================================
+function renderIntroTeachers() {
+  const list = document.querySelector('.intro-teacher-list');
+  if (!list || !teachers.length) return;
+
+  list.innerHTML = '';
+
+  teachers.slice(0, 5).forEach(t => {
+    const li = document.createElement('li');
+    li.textContent = t.name;
+    li.addEventListener('click', () => {
+      activateSection('teacher');
+    });
+    list.appendChild(li);
+  });
+}
+
+// ==================================================
+// [INTRO] 강사진 더보기 → 강사소개 이동
+// ==================================================
+const teacherMoreBtn = document.getElementById('teacherMore');
+
+teacherMoreBtn?.addEventListener('click', () => {
+  activateSection('teacher');
 });
