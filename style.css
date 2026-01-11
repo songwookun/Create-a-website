@@ -1,0 +1,573 @@
+/* ==================================================
+   00. HTML / BODY / 페이지 기본 구조
+================================================== */
+html{
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Pretendard, sans-serif;
+}
+
+.page-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* ==================================================
+   01. 헤더 영역 (로고 / PC 메뉴 / 햄버거)
+================================================== */
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.logo img {
+  height: 40px;
+}
+
+
+/* ==================================================
+   01-1. PC 메뉴 (헤더 중앙 정렬)
+================================================== */
+.pc-menu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.pc-menu button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 0 12px;
+  color: #000;
+}
+
+.pc-menu button:hover,
+.pc-menu button.active {
+  color: red;
+  font-weight: 600;
+}
+
+
+/* ==================================================
+   01-2. 햄버거 버튼 (모바일)
+================================================== */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+
+/* ==================================================
+   02. 메인 레이아웃 (페이지 중앙 정렬)
+================================================== */
+.container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.content {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
+
+
+/* ==================================================
+   03. 섹션 전환 애니메이션
+================================================== */
+.section {
+  display: none;
+  opacity: 0;
+
+  transform-origin: center center;
+  transform:
+    perspective(1200px)
+    translateY(20px)
+    scale(0.96);
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.25s ease;
+
+  will-change: transform, opacity;
+}
+
+.section.active {
+  display: block;
+  opacity: 1;
+
+  transform:
+    perspective(1200px)
+    translateY(0)
+    scale(1);
+}
+
+
+/* ==================================================
+   04. 메인 화면 (INTRO)
+================================================== */
+#intro {
+  text-align: center;
+}
+
+#center1 {
+  display: block;
+  margin: 0 auto 40px;
+  max-width: 900px;
+  width: 100%;
+  height: auto;
+}
+
+
+/* ==================================================
+   05. 메인 화면 공지 요약 영역
+================================================== */
+.intro-notice {
+  max-width: 800px;
+  margin: 40px auto 0;
+  text-align: left;
+}
+
+.intro-notice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.intro-notice-header span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.intro-notice-header button {
+  background: none;
+  border: none;
+  color: #d32f2f;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.intro-notice-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.intro-notice-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.intro-notice-list li:hover {
+  color: #d32f2f;
+}
+
+
+/* ==================================================
+   06. 공지사항 페이지 (레이아웃 / 위치)
+================================================== */
+#notice {
+  padding-top: 0;
+  text-align: left;
+}
+
+.notice-wrap {
+  max-width: 100%;
+  margin: 0;
+  padding: 0 0 40px;
+}
+
+/* 공지 실제 콘텐츠 폭 중앙 정렬 */
+.notice-list,
+.notice-header,
+.notice-page-title {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ==================================================
+   07. 공지사항 목록
+================================================== */
+.notice-list {
+  list-style: none;
+  padding: 0;
+}
+
+.notice-list li {
+  padding: 16px 0;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+
+.notice-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.notice-meta-row {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #888;
+}
+
+.notice-list li:hover .notice-title {
+  color: #d32f2f;
+}
+
+
+/* ==================================================
+   08. 공지사항 상세 페이지
+================================================== */
+#noticeDetail {
+  text-align: left;
+}
+
+.notice-detail {
+  display: none;
+  text-align: left;
+}
+
+.notice-detail.active {
+  display: block;
+}
+
+.notice-detail h2 {
+  text-align: left;
+}
+
+.notice-meta {
+  margin: 8px 0 20px;
+  font-size: 14px;
+  color: #777;
+  text-align: left;
+}
+
+.notice-body {
+  display: none;
+  margin-top: 8px;
+  color: #555;
+}
+
+.notice-list li.active .notice-body {
+  display: block;
+}
+
+.notice-list li.active h3 {
+  color: #d32f2f;
+}
+
+
+/* ==================================================
+   09. 공지 강조 효과
+================================================== */
+@keyframes pulse {
+  0% { background-color: rgba(211,47,47,0.05); }
+  50% { background-color: rgba(211,47,47,0.15); }
+  100% { background-color: transparent; }
+}
+
+.notice-list li.pulse {
+  animation: pulse 1s ease;
+}
+
+
+/* ==================================================
+   10. 공지 하단 네비게이션
+================================================== */
+.notice-footer-nav {
+  margin-top: 48px;
+  border-top: 1px solid #ddd;
+}
+
+.notice-nav button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.notice-nav button + button {
+  border-top: 1px solid #eee;
+}
+
+.notice-nav .label {
+  color: #8a8a8a;
+  min-width: 60px;
+}
+
+.notice-nav .title {
+  color: #222;
+  text-align: right;
+}
+
+.notice-list-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: #666;
+  cursor: pointer;
+}
+
+
+/* ==================================================
+   11. 공지 상단 제목 / 검색 영역
+================================================== */
+.notice-page-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.notice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notice-count {
+  font-size: 14px;
+  color: #555;
+}
+
+.notice-count span {
+  font-weight: 600;
+}
+
+.notice-search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.notice-search input {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.notice-search button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+
+/* ==================================================
+   12. 푸터 영역
+================================================== */
+.footer {
+  background: #6c82b7;
+  padding: 30px;
+  text-align: center;
+}
+
+.footer button {
+  background: none;
+  border: none;
+  color: #fff;
+  margin: 0 12px;
+  cursor: pointer;
+}
+
+
+/* ==================================================
+   13. 전화 문의 플로팅 버튼
+================================================== */
+.call-float {
+  position: fixed;
+  right: 24px;
+  bottom: 40px;
+  z-index: 1000;
+}
+
+.call-main {
+  background: #e53935;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 20px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: transform 0.25s ease;
+}
+
+.call-main:hover {
+  transform: scale(1.05);
+}
+
+.call-actions {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.call-actions.active {
+  pointer-events: auto;
+}
+
+.call-btn {
+  width: 48px;
+  height: 48px;
+  background: #1976d2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  opacity: 0;
+  transform: translateY(10px) scale(0.8);
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.call-actions.active .call-btn {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.call-btn::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 60px;
+  white-space: nowrap;
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.call-btn:hover::after {
+  opacity: 1;
+}
+
+
+/* ==================================================
+   14. 모바일 드로어 메뉴
+================================================== */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 900;
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 78%;
+  max-width: 320px;
+  height: 100%;
+  background: #fff;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  z-index: 950;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-drawer.active {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.drawer-header button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.drawer-menu button {
+  width: 100%;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.drawer-menu button:hover,
+.drawer-menu button.active {
+  color: #d32f2f;
+  background: #f7f7f7;
+  font-weight: 600;
+}
+
+
+/* ==================================================
+   15. 반응형 처리
+================================================== */
+@media (max-width: 1024px) {
+  .pc-menu { display: none; }
+  .hamburger { display: block; }
+  #center1 { max-width: 700px; margin-bottom: 32px; }
+}
+
+@media (max-width: 768px) {
+  #center1 { margin-bottom: 24px; }
+  .call-btn::after { display: none; }
+}
