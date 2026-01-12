@@ -252,13 +252,6 @@ callToggle?.addEventListener('click', () => {
   callActions.classList.toggle('active');
 });
 
-document.querySelectorAll('.call-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    if (window.innerWidth > 768) {
-      btn.classList.toggle('show-tooltip');
-    }
-  });
-});
 // ==================================================
 // [DATA] 강사 소개 JSON 로드
 // ==================================================
@@ -306,7 +299,6 @@ function renderTeachers() {
 
       <button class="arrow right" type="button" aria-label="다음">›</button>
 
-      <!-- ✅ 이 선생님 카드 전용 페이지 점 -->
       <div class="teacher-dots" aria-label="페이지 표시"></div>
     `;
 
@@ -383,4 +375,76 @@ const teacherMoreBtn = document.getElementById('teacherMore');
 
 teacherMoreBtn?.addEventListener('click', () => {
   activateSection('teacher');
+});
+
+// ==================================================
+// 입학 테스트 (날짜 정원 제한 포함)
+// ==================================================
+
+const dateInput = document.getElementById("admissionDate");
+const applyBtn = document.getElementById("applyBtn");
+
+const API_URL =
+  "https://script.google.com/macros/s/AKfycby_J-dOlmZjnCrSjlJNIt-7foKsoB9okd_pjr3hrIpiytZ74Ey6y9Nhd7bfsxVqhIp7/exec";
+
+const FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdGcz7T8AZrHCU2m-EK7ZA_BTFwcER2aJJWOC66d3MQhEdw1A/viewform";
+const DATE_FIELD_ID = "entry.425608591";
+
+
+const today = new Date();
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth() + 1).padStart(2, "0");
+const dd = String(today.getDate()).padStart(2, "0");
+const todayStr = `${yyyy}-${mm}-${dd}`;
+dateInput.min = todayStr;
+
+let closedDates = [];
+
+fetch(API_URL)
+  .then(res => res.json())
+  .then(data => {
+    closedDates = data; 
+    console.log("마감된 날짜:", closedDates);
+  })
+  .catch(err => {
+    console.error("마감 날짜 불러오기 실패", err);
+  });
+
+dateInput.addEventListener("change", () => {
+  const selected = dateInput.value;
+
+  if (!selected) {
+    applyBtn.disabled = true;
+    applyBtn.classList.remove("active");
+    return;
+  }
+
+  if (closedDates.includes(selected)) {
+    alert("해당 날짜는 정원이 마감되었습니다.");
+    dateInput.value = "";
+    applyBtn.disabled = true;
+    applyBtn.classList.remove("active");
+    return;
+  }
+
+  applyBtn.disabled = false;
+  applyBtn.classList.add("active");
+});
+
+// --------------------------------------------------
+// 신청하기 버튼
+// --------------------------------------------------
+applyBtn.addEventListener("click", () => {
+  const selectedDate = dateInput.value;
+
+  if (!selectedDate) {
+    alert("입학 테스트 날짜를 선택해주세요.");
+    return;
+  }
+
+  const url =
+    `${FORM_URL}?usp=pp_url&${DATE_FIELD_ID}=${encodeURIComponent(selectedDate)}`;
+
+  window.open(url, "_blank");
 });

@@ -23,6 +23,7 @@
         <button data-target="teacher">강사소개</button>
         <button data-target="video">동영상강의</button>
         <button data-target="course">교육과정</button>
+        <button data-target="admission">입학 테스트</button>
         <button data-target="notice">공지사항</button>
       </nav>
 
@@ -88,7 +89,25 @@
         </section>
 
         <!-- ==================================================
-             SECTION 05. 공지사항 목록 페이지
+            SECTION 05. 입학 테스트 
+        ================================================== -->
+        <section id="admission" class="section">
+          <h1>입학 테스트</h1>
+          <p>입학 테스트 신청은 날짜별 정원 제한으로 운영됩니다.</p>
+
+          <!-- 날짜 선택 -->
+          <div class="date-picker-wrap">
+            <input type="date" id="admissionDate">
+            <button id="applyBtn" disabled>신청하기</button>
+          </div>
+            <p class="calendar-note">
+            ※ 날짜별 정원 8명 제한<br>
+            ※ 정원 마감 시 신청 불가
+          </p>
+        </section>
+
+        <!-- ==================================================
+             SECTION 06. 공지사항 목록 페이지
         ================================================== -->
         <section id="notice" class="section">
           <h2 class="notice-page-title">공지사항</h2>
@@ -113,12 +132,9 @@
         </section>
 
         <!-- ==================================================
-             SECTION 06. 공지사항 상세 페이지
+             SECTION 07. 공지사항 상세 페이지
         ================================================== -->
         <section id="noticeDetail" class="section">
-          <!-- notice-detail 요소들은 JS에서 JSON 기반으로 자동 생성 -->
-
-          <!-- 이전글 / 다음글 네비게이션 -->
           <div class="notice-footer-nav">
             <div class="notice-nav">
               <button class="notice-prev">
@@ -140,7 +156,7 @@
         </section>
 
         <!-- ==================================================
-             SECTION 07. 하단 정보 페이지들
+             SECTION 08. 하단 정보 페이지들
         ================================================== -->
         <section id="map" class="section">
           <h1>오시는 길</h1>
@@ -188,8 +204,6 @@
   ================================================== -->
   <div class="menu-overlay" id="menuOverlay"></div>
 
-  <nav class="mobile-menu" id="mobileMenu"></nav>
-
   <aside class="mobile-drawer" id="mobileDrawer">
     <div class="drawer-header">
       <button id="drawerClose">✕</button>
@@ -199,6 +213,7 @@
       <button data-target="teacher">강사소개</button>
       <button data-target="video">동영상강의</button>
       <button data-target="course">교육과정</button>
+      <button data-target="admission">입학 테스트</button>
       <button data-target="notice">공지사항</button>
     </nav>
   </aside>
