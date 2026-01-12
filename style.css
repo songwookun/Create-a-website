@@ -713,6 +713,218 @@ body {
 }
 
 /* ==================================================
+   교육 과정 영역
+================================================== */
+
+/* 교육 과정 카드 */
+.course-card {
+  background: #f8f9fc;
+  border-radius: 14px;
+  padding: 24px;
+  margin-top: 24px;
+  text-align: left;
+}
+
+.course-card h3 {
+  margin-bottom: 12px;
+}
+
+.course-card ul {
+  margin-top: 12px;
+  padding-left: 18px;
+}
+
+.course-card li {
+  margin-bottom: 6px;
+}
+
+/* 특허 영역 */
+.course-patent {
+  margin-top: 60px;
+  padding: 30px;
+  border-radius: 16px;
+  background: #fff6f6;
+  text-align: center;
+}
+
+.course-patent img {
+  max-width: 100%;
+  margin-top: 20px;
+  border-radius: 12px;
+}
+
+.course-patent span {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+#metaCamp {
+  margin-top: 80px;
+  padding: 40px;
+  background: #f5f7ff;
+  border-radius: 20px;
+  text-align: left;
+}
+
+#metaCamp h2 {
+  text-align: center;
+}
+
+.course-patent {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.course-patent img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+/* ==================================================
+   약도 영역
+================================================== */
+
+.map-image {
+  margin: 30px auto;
+  text-align: center;
+}
+
+.map-image img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.map-info {
+  text-align: left;
+  margin-top: 30px;
+  line-height: 1.8;
+}
+
+.map-info p {
+  margin-bottom: 8px;
+}
+
+.map-note {
+  margin-top: 14px;
+  color: #444;
+}
+
+.map-warning {
+  margin-top: 12px;
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+.map-phone,
+.map-kakao {
+  margin-top: 6px;
+}
+
+.map-date {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #777;
+  text-align: right;
+}
+/* ==================================================
+   메인화면 교육과정
+================================================== */
+.intro-course {
+  max-width: 800px;
+  margin: 40px auto 0;
+  text-align: left;
+}
+
+.intro-course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.intro-course-header span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.intro-course-header button {
+  background: none;
+  border: none;
+  color: #d32f2f;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.intro-course-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.intro-course-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+/* ==================================================
+   메인화면 입학 테스트 안내
+================================================== */
+
+.intro-admission-list {
+  list-style: none;
+  padding-left: 0;
+  line-height: 1.7;
+}
+
+.intro-admission-list li {
+  margin-bottom: 5px;
+}
+
+.intro-admission-list span {
+  font-size: 14px;
+  color: #666;
+}
+
+/* ==================================================
+   메인화면 입학 TEST 요약 영역
+================================================== */
+
+.intro-admission {
+  max-width: 800px;
+  margin: 40px auto 0;
+  text-align: left;
+}
+
+.intro-admission-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1px;
+}
+
+.intro-admission-header span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.intro-admission-header button {
+  background: none;
+  border: none;
+  color: #d32f2f;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* 메인 화면 섹션 구분선 */
+.section-divider {
+  max-width: 800px;
+  margin: 25px auto;
+  border-bottom: 1px solid #eee;
+}
+
+/* ==================================================
    15. 반응형 처리
 ================================================== */
 @media (max-width: 1024px) {

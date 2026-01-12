@@ -221,7 +221,6 @@ function updateNoticeCount() {
   if (el) el.textContent = notices.length;
 }
 
-
 // ==================================================
 // [NOTICE] 공지사항 검색 기능
 // ==================================================
@@ -240,7 +239,6 @@ noticeSearchBtn?.addEventListener('click', filterNotices);
 noticeSearchInput?.addEventListener('keydown', e => {
   if (e.key === 'Enter') filterNotices();
 });
-
 
 // ==================================================
 // [CALL] 전화 문의 플로팅 버튼
@@ -447,4 +445,103 @@ applyBtn.addEventListener("click", () => {
     `${FORM_URL}?usp=pp_url&${DATE_FIELD_ID}=${encodeURIComponent(selectedDate)}`;
 
   window.open(url, "_blank");
+});
+
+// ==================================================
+// [DATA] 교육 과정 JSON 로드
+// ==================================================
+fetch('data/courses.json')
+  .then(res => res.json())
+  .then(data => renderCourses(data));
+
+function renderCourses(data) {
+  document.getElementById('courseTitle').textContent = data.title;
+  document.getElementById('courseSubtitle').textContent = data.subtitle;
+
+  const list = document.getElementById('courseList');
+  list.innerHTML = '';
+
+  data.courses.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'course-card';
+
+    card.innerHTML = `
+      <h3>${c.title}</h3>
+      ${c.description.map(d => `<p>${d}</p>`).join('')}
+      <ul>
+        ${c.focus.map(f => `<li>${f}</li>`).join('')}
+      </ul>
+    `;
+
+    list.appendChild(card);
+  });
+
+  const patent = data.patent;
+  const patentWrap = document.getElementById('coursePatent');
+
+  patentWrap.innerHTML = `
+    <div class="course-patent">
+      <h3>${patent.title}</h3>
+      <p>${patent.description}</p>
+      <img src="${patent.image}" alt="특허증">
+      <span>${patent.note}</span>
+    </div>
+  `;
+}
+
+// ==================================================
+// [INTRO] 메인 화면 교육과정 요약 표시
+// ==================================================
+
+function renderIntroCourses(data) {
+  const list = document.querySelector('.intro-course-list');
+  if (!list || !data.courses?.length) return;
+
+  list.innerHTML = '';
+
+  data.courses.slice(0, 3).forEach(c => {
+    const li = document.createElement('li');
+    li.textContent = c.title;
+    li.addEventListener('click', () => {
+      activateSection('course');
+    });
+    list.appendChild(li);
+  });
+}
+
+// ==================================================
+// [DATA] 교육 과정 JSON 로드 (메인 + 상세 공용)
+// ==================================================
+
+fetch('data/courses.json')
+  .then(res => res.json())
+  .then(data => {
+    renderCourses(data);
+    renderIntroCourses(data);
+  })
+  .catch(err => {
+    console.error('교육과정 데이터 로드 실패', err);
+  });
+
+// ==================================================
+// [INTRO] 교육과정 더보기 → 교육과정 페이지 이동
+// ==================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  const courseMoreBtn = document.getElementById('courseMore');
+
+  courseMoreBtn?.addEventListener('click', () => {
+    activateSection('course');
+  });
+});
+
+// ==================================================
+// [INTRO] 입학 테스트 더보기 → 입학 테스트 페이지 이동
+// ==================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const admissionMoreBtn = document.getElementById('admissionMore');
+
+  admissionMoreBtn?.addEventListener('click', () => {
+    activateSection('admission');
+  });
 });

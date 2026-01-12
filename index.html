@@ -52,6 +52,49 @@
             </ul>
           </div>
 
+          <!-- 교육과정 요약 영역 -->
+          <div id="intro_course" class="intro-course">
+            <div class="intro-course-header">
+              <span>교육과정</span>
+              <button id="courseMore">더보기 →</button>
+            </div>
+
+            <ul class="intro-course-list">
+              <!-- JS로 요약 자동 생성 -->
+            </ul>
+          </div>
+
+          <!-- 입학 테스트 안내 영역 -->
+          <div id="intro_admission" class="intro-admission">
+            <div class="intro-admission-header">
+              <span>✔ 입학 TEST 안내</span>
+              <button id="admissionMore">더보기 →</button>
+            </div>
+
+            <div class="intro-admission-desc">
+              <ul class="intro-admission-list">
+                <li>
+                  매주 화·금 <strong>16:00, 19:00</strong> 진행<br>
+                  <span>(해당 시간 학원 문의 / 반 강의가 있을 경우 진행 가능)</span>
+                </li>
+                <li>
+                  시험시간: <strong>최대 25분</strong><br>
+                  <span>(20~25문항, 어휘·비문학·문법)</span>
+                </li>
+                <li>
+                  학년별 구성<br>
+                  · 중등부 25분 (20~25문항)<br>
+                  · 고등부 비문학 / 어휘 / 문법<br>
+                  · 예비고 80분 (45문항, 모의고사)
+                </li>
+                <li>
+                  학원 내부 사정에 의해 <strong>일정 변동 가능</strong>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="section-divider"></div>
+
           <!-- 메인 화면 공지 요약 영역 -->
           <div id="intro_notice" class="intro-notice">
             <div class="intro-notice-header">
@@ -84,8 +127,12 @@
              SECTION 04. 교육 과정
         ================================================== -->
         <section id="course" class="section">
-          <h1>교육 과정</h1>
-          <p>내신 · 수능 완벽 대비 커리큘럼</p>
+          <h1 id="courseTitle"></h1>
+          <p id="courseSubtitle"></p>
+
+          <div id="courseList"></div>
+
+          <div id="coursePatent"></div>
         </section>
 
         <!-- ==================================================
@@ -160,7 +207,50 @@
         ================================================== -->
         <section id="map" class="section">
           <h1>오시는 길</h1>
-          <p>서울 강남구 대치동 ○○로 ○○</p>
+
+          <!-- 약도 이미지 -->
+          <div class="map-image">
+            <img src="images/map.png" alt="안보라 학원 약도">
+          </div>
+
+          <!-- 지점 안내 -->
+          <div class="map-info">
+            <p><strong>아르누보관</strong> : 서울시 강남구 도곡로 405 아르누보빌딩 301-2호</p>
+            <p><strong>디마크관</strong> : 서울시 강남구 도곡로 408 디마크타워 609호</p>
+            <p><strong>한티관</strong> : 서울시 강남구 선릉로 318 동국상가 203-4호</p>
+
+            <p class="map-note">
+              네이버·다음·티맵 지도검색에서 <strong>“안보라학원”</strong> 검색 시<br>
+              한티관 / 디마크관 / 아르누보관 모두 확인 가능합니다.
+            </p>
+
+            <hr>
+
+            <p><strong>상담시간</strong> : 화·목 15:00~20:00 / 토·일 11:00~20:00</p>
+            <p><strong>정기휴무</strong> : 매주 월요일</p>
+
+            <p class="map-warning">
+              ※ 방문 상담은 <strong>반드시 예약 후 방문</strong> 부탁드립니다.
+            </p>
+
+            <p class="map-phone">
+              문의전화 : <strong>556-8383</strong>
+            </p>
+
+            <p class="map-kakao">
+              카카오톡 : <strong>“안보라 학원”</strong> 플러스 친구 등록 
+            </p>
+
+             <!-- QR 코드 영역 -->
+            <div class="map-qr">
+              <img src="images/qr.png" alt="안보라 학원 카카오톡 QR코드">
+              <p>카카오톡 플러스 친구 추가</p>
+            </div>
+
+            <p class="map-date">
+              &lt;신규안내문&gt; 2026년 1월 기준
+            </p>
+          </div>
         </section>
 
         <section id="terms" class="section">
